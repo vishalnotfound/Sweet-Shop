@@ -38,6 +38,11 @@ async def seed_data():
                 models.Sweet(name="Fudge Squares", category="Chocolate", price=6.49, quantity=14),
                 models.Sweet(name="Taffy Assortment", category="Soft Candy", price=5.99, quantity=20),
                 models.Sweet(name="Cotton Candy", category="Spun Sugar", price=3.99, quantity=28),
+                models.Sweet(name="Sour Gummy Worms", category="Gummies", price=3.49, quantity=32),
+                models.Sweet(name="Chocolate Covered Cherries", category="Chocolate", price=7.49, quantity=11),
+                models.Sweet(name="Jawbreaker", category="Hard Candy", price=0.99, quantity=60),
+                models.Sweet(name="Candy Corn", category="Seasonal", price=2.99, quantity=38),
+                models.Sweet(name="Malt Balls", category="Chocolate", price=5.99, quantity=25),
             ]
             db.add_all(default_candies)
             db.commit()

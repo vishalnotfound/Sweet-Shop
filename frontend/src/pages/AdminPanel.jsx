@@ -69,14 +69,16 @@ export default function AdminPanel() {
 
   return (
     <div className="max-w-6xl mx-auto px-4">
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-800 mb-2">Admin Panel</h1>
-        <p className="text-gray-600">Manage your sweet shop inventory</p>
+      <div className="mb-10">
+        <h1 className="text-4xl font-bold text-gray-900 mb-3">Admin Panel</h1>
+        <p className="text-gray-600 text-lg">
+          Manage your sweet shop inventory
+        </p>
       </div>
 
       {/* Add Sweet Form */}
-      <div className="bg-white rounded-lg shadow-md border border-gray-200 p-8 mb-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">
+      <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-10 mb-10">
+        <h2 className="text-2xl font-bold text-gray-900 mb-8">
           {editingId ? "Update Sweet" : "Add New Sweet"}
         </h2>
         <form
@@ -84,11 +86,11 @@ export default function AdminPanel() {
           className="grid grid-cols-1 sm:grid-cols-2 gap-6"
         >
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
               Sweet Name
             </label>
             <input
-              className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600 transition"
+              className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-200 transition"
               placeholder="e.g., Chocolate Fudge"
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -96,11 +98,11 @@ export default function AdminPanel() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
               Category
             </label>
             <input
-              className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600 transition"
+              className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-200 transition"
               placeholder="e.g., Chocolate, Candy"
               value={form.category}
               onChange={(e) => setForm({ ...form, category: e.target.value })}
@@ -108,11 +110,11 @@ export default function AdminPanel() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
               Price ($)
             </label>
             <input
-              className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600 transition"
+              className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-200 transition"
               type="number"
               placeholder="9.99"
               step="0.01"
@@ -124,11 +126,11 @@ export default function AdminPanel() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
               Quantity
             </label>
             <input
-              className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600 transition"
+              className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-200 transition"
               type="number"
               placeholder="50"
               value={form.quantity}
@@ -138,14 +140,14 @@ export default function AdminPanel() {
               required
             />
           </div>
-          <button className="sm:col-span-2 bg-green-700 hover:bg-green-800 text-white p-3 rounded-lg font-bold transition">
+          <button className="sm:col-span-2 bg-emerald-700 hover:bg-emerald-800 text-white p-3 rounded-lg font-bold transition duration-200">
             {editingId ? "Update Sweet" : "Add Sweet"}
           </button>
           {editingId && (
             <button
               type="button"
               onClick={handleCancel}
-              className="sm:col-span-2 bg-gray-500 hover:bg-gray-600 text-white p-3 rounded-lg font-bold transition"
+              className="sm:col-span-2 bg-gray-500 hover:bg-gray-600 text-white p-3 rounded-lg font-bold transition duration-200"
             >
               Cancel Edit
             </button>
@@ -154,9 +156,9 @@ export default function AdminPanel() {
       </div>
 
       {/* List of Sweets */}
-      <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
-        <div className="px-8 py-6 border-b border-gray-200 bg-amber-50">
-          <h2 className="text-2xl font-bold text-gray-800">Sweet Inventory</h2>
+      <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
+        <div className="px-8 py-7 border-b border-gray-200 bg-gradient-to-r from-emerald-700 to-teal-700">
+          <h2 className="text-2xl font-bold text-white">Sweet Inventory</h2>
         </div>
         {sweets.length === 0 ? (
           <div className="p-12 text-center">
@@ -167,21 +169,21 @@ export default function AdminPanel() {
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-amber-50 border-b border-gray-200">
+              <thead className="bg-gradient-to-r from-emerald-700 to-teal-700 border-b border-gray-200">
                 <tr>
-                  <th className="px-6 py-4 text-left font-semibold text-gray-700">
+                  <th className="px-6 py-4 text-left font-semibold text-white">
                     Name
                   </th>
-                  <th className="px-6 py-4 text-left font-semibold text-gray-700">
+                  <th className="px-6 py-4 text-left font-semibold text-white">
                     Category
                   </th>
-                  <th className="px-6 py-4 text-left font-semibold text-gray-700">
+                  <th className="px-6 py-4 text-left font-semibold text-white">
                     Price
                   </th>
-                  <th className="px-6 py-4 text-left font-semibold text-gray-700">
+                  <th className="px-6 py-4 text-left font-semibold text-white">
                     Stock
                   </th>
-                  <th className="px-6 py-4 text-left font-semibold text-gray-700">
+                  <th className="px-6 py-4 text-left font-semibold text-white">
                     Actions
                   </th>
                 </tr>
@@ -190,22 +192,22 @@ export default function AdminPanel() {
                 {sweets.map((sweet) => (
                   <tr
                     key={sweet.id}
-                    className="border-b border-gray-200 hover:bg-amber-50 transition"
+                    className="border-b border-gray-200 hover:bg-gray-50 transition"
                   >
-                    <td className="px-6 py-4 font-medium text-gray-800">
+                    <td className="px-6 py-4 font-medium text-gray-900">
                       {sweet.name}
                     </td>
                     <td className="px-6 py-4 text-gray-700">
                       {sweet.category}
                     </td>
-                    <td className="px-6 py-4 font-semibold text-gray-800">
+                    <td className="px-6 py-4 font-semibold text-gray-900">
                       ${sweet.price.toFixed(2)}
                     </td>
                     <td className="px-6 py-4">
                       <span
-                        className={`px-3 py-1 rounded text-sm font-semibold ${
+                        className={`px-4 py-2 rounded-full text-sm font-semibold ${
                           sweet.quantity > 10
-                            ? "bg-green-100 text-green-700"
+                            ? "bg-emerald-100 text-emerald-700"
                             : sweet.quantity > 0
                             ? "bg-yellow-100 text-yellow-700"
                             : "bg-red-100 text-red-700"
@@ -218,13 +220,13 @@ export default function AdminPanel() {
                       <div className="flex gap-2">
                         <button
                           onClick={() => handleEdit(sweet)}
-                          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-bold transition"
+                          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-bold transition duration-200"
                         >
                           Edit
                         </button>
                         <button
                           onClick={() => handleDelete(sweet.id)}
-                          className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-bold transition"
+                          className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-bold transition duration-200"
                         >
                           Delete
                         </button>

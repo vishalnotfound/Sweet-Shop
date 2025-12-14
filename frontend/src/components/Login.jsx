@@ -36,23 +36,23 @@ export default function Login({ setUser }) {
   };
 
   return (
-    <div className="min-h-screen bg-amber-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8 border border-gray-200">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl mb-3">🍬</h1>
-          <h2 className="text-3xl font-bold text-gray-800">
-            {isRegister ? "Create Account" : "Welcome Back"}
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50 flex items-center justify-center p-4">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-10 border border-gray-100">
+        <div className="text-center mb-10">
+          <h1 className="text-5xl mb-4">🍬</h1>
+          <h2 className="text-3xl font-bold text-gray-900">
+            {isRegister ? "Join Us" : "Welcome Back"}
           </h2>
-          <p className="text-gray-600 mt-2">Sweet Shop</p>
+          <p className="text-gray-500 mt-2">Sweet Shop</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
               Username
             </label>
             <input
-              className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600 transition"
+              className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-200 transition"
               placeholder="Enter your username"
               onChange={(e) =>
                 setFormData({ ...formData, username: e.target.value })
@@ -60,11 +60,11 @@ export default function Login({ setUser }) {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
               Password
             </label>
             <input
-              className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600 transition"
+              className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-200 transition"
               type="password"
               placeholder="Enter your password"
               onChange={(e) =>
@@ -74,11 +74,11 @@ export default function Login({ setUser }) {
           </div>
           {isRegister && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
                 Account Type
               </label>
               <select
-                className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600 transition"
+                className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-200 transition"
                 onChange={(e) =>
                   setFormData({ ...formData, role: e.target.value })
                 }
@@ -88,12 +88,12 @@ export default function Login({ setUser }) {
               </select>
             </div>
           )}
-          <button className="w-full bg-green-700 hover:bg-green-800 text-white p-3 rounded-lg font-bold transition mt-6">
-            {isRegister ? "Register" : "Login"}
+          <button className="w-full bg-emerald-700 hover:bg-emerald-800 text-white p-3 rounded-lg font-bold transition duration-200 mt-8">
+            {isRegister ? "Create Account" : "Sign In"}
           </button>
         </form>
 
-        <div className="mt-6 text-center">
+        <div className="mt-8 text-center">
           <p className="text-gray-600 text-sm">
             {isRegister
               ? "Already have an account? "

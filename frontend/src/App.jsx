@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import AdminPanel from "./pages/AdminPanel";
 import Cart from "./pages/Cart";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import { useState, useEffect } from "react";
 
 function App() {
@@ -33,9 +34,9 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-amber-50">
+      <div className="min-h-screen bg-white flex flex-col">
         <Navbar user={user} setUser={setUser} />
-        <main className="py-8">
+        <main className="py-12 bg-gray-50 flex-grow">
           <Routes>
             <Route
               path="/"
@@ -54,6 +55,7 @@ function App() {
             />
           </Routes>
         </main>
+        <Footer />
       </div>
     </BrowserRouter>
   );

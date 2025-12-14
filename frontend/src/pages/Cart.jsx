@@ -64,28 +64,34 @@ export default function Cart() {
 
   const handlePurchase = async () => {
     if (cartItems.length === 0) return;
-    
+
     setIsPurchasing(true);
     try {
       const { data } = await API.post("/cart/checkout");
-      
+
       // Create message with all purchased items
-      const itemNames = data.items.map(item => `${item.name} (x${item.quantity})`).join(", ");
+      const itemNames = data.items
+        .map((item) => `${item.name} (x${item.quantity})`)
+        .join(", ");
       setPurchaseMessage(`Congratulation! You bought: ${itemNames}`);
-      
-      // Clear cart and reset
-      setCartItems([]);
-      setTotal(0);
-      
-      // Hide message after 4 seconds and redirect
+
+      // Wait 4 seconds before clearing cart and redirecting
+      // This ensures the message is visible first
       setTimeout(() => {
-        setPurchaseMessage("");
-        window.dispatchEvent(new Event("cartUpdated"));
-        navigate("/");
+        setCartItems([]);
+        setTotal(0);
+
+        setTimeout(() => {
+          setPurchaseMessage("");
+          window.dispatchEvent(new Event("cartUpdated"));
+          navigate("/");
+        }, 500);
       }, 4000);
     } catch (err) {
       console.error("Error during checkout:", err);
-      setPurchaseMessage(err.response?.data?.detail || "Purchase failed. Please try again.");
+      setPurchaseMessage(
+        err.response?.data?.detail || "Purchase failed. Please try again."
+      );
       setTimeout(() => setPurchaseMessage(""), 3000);
     } finally {
       setIsPurchasing(false);
@@ -120,20 +126,12 @@ export default function Cart() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold text-gray-800 mb-8">Shopping Cart</h1>
+    <div className="max-w-5xl mx-auto px-4 py-8">
+      <h1 className="text-4xl font-bold text-gray-900 mb-10">Shopping Cart</h1>
 
-      {/* Purchase Success Message */}
-      {purchaseMessage && (
-        <div className="bg-green-100 border-l-4 border-green-500 text-green-700 px-6 py-4 rounded-lg mb-6 flex items-center animate-pulse">
-          <span className="text-2xl mr-3">✓</span>
-          <p>{purchaseMessage}</p>
-        </div>
-      )}
-
-      <div className="bg-white rounded-lg shadow border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
         {/* Table Header */}
-        <div className="grid grid-cols-5 gap-4 bg-amber-50 border-b border-gray-200 p-4 font-semibold text-gray-700">
+        <div className="grid grid-cols-5 gap-4 bg-gradient-to-r from-emerald-700 to-teal-700 border-b border-gray-200 p-5 font-semibold text-white">
           <div>Product</div>
           <div>Price</div>
           <div>Quantity</div>
@@ -188,10 +186,10 @@ export default function Cart() {
       </div>
 
       {/* Summary */}
-      <div className="mt-8 bg-amber-50 rounded-lg border border-gray-200 p-6">
-        <div className="flex justify-between items-center mb-4 pb-4 border-b border-gray-300">
-          <span className="text-lg font-semibold text-gray-700">Subtotal:</span>
-          <span className="text-2xl font-bold text-gray-800">
+      <div className="mt-10 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl border border-gray-200 p-8">
+        <div className="flex justify-between items-center mb-6 pb-6 border-b border-gray-300">
+          <span className="text-lg font-bold text-gray-800">Total:</span>
+          <span className="text-4xl font-bold text-emerald-700">
             ${total.toFixed(2)}
           </span>
         </div>
@@ -200,26 +198,34 @@ export default function Cart() {
           <button
             onClick={handlePurchase}
             disabled={isPurchasing || cartItems.length === 0}
-            className="w-full bg-green-700 hover:bg-green-800 disabled:bg-gray-400 text-white px-6 py-3 rounded-lg font-semibold transition disabled:cursor-not-allowed"
+            className="w-full bg-emerald-700 hover:bg-emerald-800 disabled:bg-gray-400 text-white px-8 py-4 rounded-lg font-bold transition duration-200 disabled:cursor-not-allowed text-lg"
           >
-            {isPurchasing ? "Processing..." : "Purchase"}
+            {isPurchasing ? "Processing Purchase..." : "Purchase"}
           </button>
           <div className="flex gap-4">
             <button
               onClick={clearCart}
-              className="flex-1 border border-red-600 text-red-600 px-6 py-3 rounded-lg font-semibold hover:bg-red-50 transition"
+              className="flex-1 border-2 border-red-600 text-red-600 hover:bg-red-50 px-6 py-3 rounded-lg font-semibold transition duration-200"
             >
               Clear Cart
             </button>
             <Link
               to="/"
-              className="flex-1 bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition text-center"
+              className="flex-1 bg-gray-700 text-white hover:bg-gray-800 px-6 py-3 rounded-lg font-semibold transition duration-200 text-center"
             >
               Continue Shopping
             </Link>
           </div>
         </div>
       </div>
+
+      {/* Purchase Toast Notification - Bottom Right */}
+      {purchaseMessage && (
+        <div className="fixed bottom-8 right-8 bg-emerald-600 text-white px-8 py-5 rounded-2xl shadow-2xl flex items-center gap-3 animate-bounce max-w-md z-50">
+          <span className="text-2xl">✓</span>
+          <p className="font-semibold text-sm">{purchaseMessage}</p>
+        </div>
+      )}
     </div>
   );
 }
