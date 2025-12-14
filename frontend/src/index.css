@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply font-sans;
+  }
+
+  html {
+    font-family: "Plus Jakarta Sans", "Sora", system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Sora", "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+    @apply font-bold;
+  }
+
+  body {
+    @apply antialiased;
+    letter-spacing: -0.3px;
+  }
+
+  button {
+    font-family: "Plus Jakarta Sans", "Sora", system-ui, -apple-system, sans-serif;
+  }
+
+  input, select, textarea {
+    font-family: "Plus Jakarta Sans", "Sora", system-ui, -apple-system, sans-serif;
+  }
+}
