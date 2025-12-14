@@ -1,5 +1,5 @@
 import { useState } from "react";
-import API from "../api";
+import API from "../api"; // Make sure your api.js has baseURL including /api
 import { useNavigate } from "react-router-dom";
 
 export default function Login({ setUser }) {
@@ -15,23 +15,28 @@ export default function Login({ setUser }) {
     e.preventDefault();
     try {
       if (isRegister) {
+        // Registration
         await API.post("/auth/register", formData);
-        alert("Registered! Please login.");
+        alert("Registered successfully! Please login.");
         setIsRegister(false);
       } else {
+        // Login
         const formDataUrl = new FormData();
         formDataUrl.append("username", formData.username);
         formDataUrl.append("password", formData.password);
 
         const { data } = await API.post("/auth/login", formDataUrl);
+
+        // Save token & user info
         localStorage.setItem("token", data.access_token);
         localStorage.setItem("role", data.role);
         localStorage.setItem("username", formData.username);
         setUser({ role: data.role, username: formData.username });
-        navigate("/");
+
+        navigate("/"); // redirect to home/dashboard
       }
     } catch (err) {
-      alert("Error: " + err.response?.data?.detail || "Failed");
+      alert("Error: " + err.response?.data?.detail || "Login/Register failed");
     }
   };
 
@@ -54,11 +59,14 @@ export default function Login({ setUser }) {
             <input
               className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-200 transition"
               placeholder="Enter your username"
+              value={formData.username}
               onChange={(e) =>
                 setFormData({ ...formData, username: e.target.value })
               }
+              required
             />
           </div>
+
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
               Password
@@ -67,11 +75,14 @@ export default function Login({ setUser }) {
               className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-200 transition"
               type="password"
               placeholder="Enter your password"
+              value={formData.password}
               onChange={(e) =>
                 setFormData({ ...formData, password: e.target.value })
               }
+              required
             />
           </div>
+
           {isRegister && (
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -79,6 +90,7 @@ export default function Login({ setUser }) {
               </label>
               <select
                 className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-200 transition"
+                value={formData.role}
                 onChange={(e) =>
                   setFormData({ ...formData, role: e.target.value })
                 }
@@ -88,6 +100,7 @@ export default function Login({ setUser }) {
               </select>
             </div>
           )}
+
           <button className="w-full bg-emerald-700 hover:bg-emerald-800 text-white p-3 rounded-lg font-bold transition duration-200 mt-8">
             {isRegister ? "Create Account" : "Sign In"}
           </button>
