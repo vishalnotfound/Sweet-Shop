@@ -19,7 +19,7 @@ export default function Login({ setUser }) {
         alert("Registered! Please login.");
         setIsRegister(false);
       } else {
-        const formDataUrl = new FormData(); // OAuth2 expects form data
+        const formDataUrl = new FormData();
         formDataUrl.append("username", formData.username);
         formDataUrl.append("password", formData.password);
 
